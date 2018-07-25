@@ -1,5 +1,6 @@
 package com.example.project.entity;
 
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -57,6 +58,12 @@ public class OrderPayment extends Model<OrderPayment> {
      * 支付时间
      */
     private Date payDate;
+
+    /**
+     * 订单状态，1未支付，2已支付,9已删除
+     */
+    @TableLogic
+    private Integer orderStatus;
 
 
     public Long getId() {
@@ -129,6 +136,14 @@ public class OrderPayment extends Model<OrderPayment> {
 
     public void setPayDate(Date payDate) {
         this.payDate = payDate;
+    }
+
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override

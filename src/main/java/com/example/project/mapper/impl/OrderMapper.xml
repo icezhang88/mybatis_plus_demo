@@ -2,8 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.project.mapper.OrderMapper">
 
-    <!-- 开启二级缓存 -->
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.project.entity.Order">
@@ -20,5 +18,18 @@
         <result column="pay_date" property="payDate" />
         <result column="modify_date" property="modifyDate" />
     </resultMap>
+
+    <select id="findOrderDetail" resultType="java.util.HashMap">
+        SELECT
+            o.member_id,
+            op.*
+        FROM
+            tl_order o,
+            tl_order_payment op
+        WHERE
+            o.order_id = op.order_id
+            AND o.order_status = #{status}
+            AND o.order_id = #{orderId}
+    </select>
 
 </mapper>

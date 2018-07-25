@@ -3,6 +3,7 @@ package com.example.project.entity;
 import java.util.Date;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableLogic;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.baomidou.mybatisplus.enums.IdType;
 
@@ -27,8 +28,9 @@ public class Order extends Model<Order> {
     @TableId(value = "order_id", type = IdType.INPUT)
     private String orderId;
     /**
-     * 订单状态，1未支付，2已支付
+     * 订单状态，1未支付，2已支付,9已删除
      */
+    @TableLogic
     private Integer orderStatus;
     /**
      * 产品ID
