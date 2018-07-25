@@ -1,14 +1,17 @@
 package com.example.project.controller;
 
 
-import com.baomidou.mybatisplus.plugins.Page;
 import com.example.project.entity.Order;
-import com.example.project.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.project.utils.Result;
+import com.example.project.utils.ResultGenerator;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,21 +19,18 @@ import org.springframework.stereotype.Controller;
  * </p>
  *
  * @author liushiqiang
- * @since 2018-07-24
+ * @since 201-07-24
  */
-@Controller
+@RestController
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-
+    @ApiOperation(value = "订单列表")
     @GetMapping("list")
-    public String list(){
-
-        Page<Order> page = new Page<>();
-        orderService.selectPage(page);
-        return null;
+    public Result list(@RequestParam Integer status){
+        Order order = new Order();
+        List<Order> orders = order.selectAll();
+        return ResultGenerator.genSuccessResult(orders);
     }
 
 }
