@@ -27,11 +27,11 @@ public class GeneratorServiceEntity {
 
     private static final String JDBC_DIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
     private static final Boolean SERVICE_NAME_STARTWHITH_I = false; //user -> UserService, 设置成true: user -> IUserService
-    private static final String TABLE_PRE_FIX = "tl_";//表名前缀(需要修改)
+    private static final String TABLE_PRE_FIX = "s_";//表名前缀(需要修改)
 
 
     //JDBC配置，请修改为你项目的实际配置
-    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/market_2c_member";
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/spider";
     private static final String JDBC_USERNAME = "root";
     private static final String JDBC_PASSWORD = "l930202";
 
@@ -42,7 +42,7 @@ public class GeneratorServiceEntity {
 
     @Test
     public void generateCode() {
-        generateByTables(SERVICE_NAME_STARTWHITH_I, BASE_PACKAGE, "tl_order", "tl_order_payment");
+        generateByTables(SERVICE_NAME_STARTWHITH_I, BASE_PACKAGE, "s_vaccine_record");
     }
 
     private void generateByTables(boolean serviceNameStartWithI, String packageName, String... tableNames) {
@@ -83,7 +83,7 @@ public class GeneratorServiceEntity {
         packageConfig.setParent(packageName);
         //packageConfig.setModuleName("test");
         packageConfig.setController("controller");
-        packageConfig.setXml("impl.impl");
+        packageConfig.setXml("mapper.impl");
 
         if (!serviceNameStartWithI) {
             config.setServiceName("%sService");
